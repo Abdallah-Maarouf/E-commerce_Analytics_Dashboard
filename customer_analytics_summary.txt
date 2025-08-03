@@ -1,0 +1,13 @@
+CUSTOMER ANALYTICS SUMMARY REPORT
+==================================================
+
+KEY METRICS:
+Total Customers: 99,441
+Total Revenue: 15843553.24
+Average Order Value: 159.33
+High Value Customer Rate: 49.61
+Avg Delivery Days: 12.10
+Delivery Reliability Rate: 90.45
+
+Analysis completed: 2025-08-03 11:08:38
+Data period: 2016-09-04 21:15:19 to 2018-10-17 17:30:18

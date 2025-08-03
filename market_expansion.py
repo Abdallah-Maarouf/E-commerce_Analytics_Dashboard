@@ -139,51 +139,100 @@ class MarketExpansionAnalyzer:
     
     def calculate_untapped_potential(self):
         """
-        Calculate untapped market potential using population data and current penetration.
+        Calculate untapped market potential using population data, economic context, and realistic penetration benchmarks.
         Addresses Requirement 2.2
         """
-        logger.info("Calculating untapped market potential...")
+        logger.info("Calculating untapped market potential with economic context...")
         
-        # Brazilian state population data (approximate 2020 census data)
-        state_population = {
-            'SP': 46649132, 'RJ': 17463349, 'MG': 21411923, 'BA': 15203934,
-            'PR': 11597484, 'RS': 11466630, 'PE': 9674793, 'CE': 9240580,
-            'PA': 8777124, 'SC': 7338473, 'GO': 7206589, 'MA': 7153262,
-            'PB': 4059905, 'AM': 4269995, 'ES': 4108508, 'MT': 3567234,
-            'AL': 3365351, 'PI': 3289290, 'DF': 3094325, 'MS': 2839188,
-            'RN': 3560903, 'RO': 1815278, 'AC': 906876, 'AP': 877613,
-            'SE': 2338474, 'TO': 1607363, 'RR': 652713
+        # Brazilian state data (2020 census + economic data)
+        state_data = {
+            'SP': {'population': 46649132, 'gdp_per_capita': 56956, 'tier': 1, 'urban_rate': 0.96},
+            'RJ': {'population': 17463349, 'gdp_per_capita': 51929, 'tier': 1, 'urban_rate': 0.97},
+            'MG': {'population': 21411923, 'gdp_per_capita': 35219, 'tier': 1, 'urban_rate': 0.85},
+            'BA': {'population': 15203934, 'gdp_per_capita': 22045, 'tier': 2, 'urban_rate': 0.73},
+            'PR': {'population': 11597484, 'gdp_per_capita': 42791, 'tier': 2, 'urban_rate': 0.85},
+            'RS': {'population': 11466630, 'gdp_per_capita': 45180, 'tier': 2, 'urban_rate': 0.85},
+            'PE': {'population': 9674793, 'gdp_per_capita': 21077, 'tier': 2, 'urban_rate': 0.80},
+            'CE': {'population': 9240580, 'gdp_per_capita': 18320, 'tier': 2, 'urban_rate': 0.75},
+            'PA': {'population': 8777124, 'gdp_per_capita': 17179, 'tier': 3, 'urban_rate': 0.68},
+            'SC': {'population': 7338473, 'gdp_per_capita': 46016, 'tier': 2, 'urban_rate': 0.84},
+            'GO': {'population': 7206589, 'gdp_per_capita': 30544, 'tier': 2, 'urban_rate': 0.90},
+            'MA': {'population': 7153262, 'gdp_per_capita': 14748, 'tier': 3, 'urban_rate': 0.64},
+            'PB': {'population': 4059905, 'gdp_per_capita': 17687, 'tier': 3, 'urban_rate': 0.75},
+            'AM': {'population': 4269995, 'gdp_per_capita': 23894, 'tier': 3, 'urban_rate': 0.79},
+            'ES': {'population': 4108508, 'gdp_per_capita': 38177, 'tier': 2, 'urban_rate': 0.83},
+            'MT': {'population': 3567234, 'gdp_per_capita': 49265, 'tier': 2, 'urban_rate': 0.82},
+            'AL': {'population': 3365351, 'gdp_per_capita': 16463, 'tier': 3, 'urban_rate': 0.73},
+            'PI': {'population': 3289290, 'gdp_per_capita': 14454, 'tier': 3, 'urban_rate': 0.66},
+            'DF': {'population': 3094325, 'gdp_per_capita': 85830, 'tier': 1, 'urban_rate': 0.97},
+            'MS': {'population': 2839188, 'gdp_per_capita': 39265, 'tier': 2, 'urban_rate': 0.86},
+            'RN': {'population': 3560903, 'gdp_per_capita': 18690, 'tier': 3, 'urban_rate': 0.77},
+            'RO': {'population': 1815278, 'gdp_per_capita': 26157, 'tier': 3, 'urban_rate': 0.74},
+            'AC': {'population': 906876, 'gdp_per_capita': 18327, 'tier': 3, 'urban_rate': 0.73},
+            'AP': {'population': 877613, 'gdp_per_capita': 19952, 'tier': 3, 'urban_rate': 0.90},
+            'SE': {'population': 2338474, 'gdp_per_capita': 22942, 'tier': 3, 'urban_rate': 0.74},
+            'TO': {'population': 1607363, 'gdp_per_capita': 22555, 'tier': 3, 'urban_rate': 0.79},
+            'RR': {'population': 652713, 'gdp_per_capita': 22896, 'tier': 3, 'urban_rate': 0.76}
         }
         
-        # Add population data to state summary
-        self.state_summary['population'] = self.state_summary['state'].map(state_population)
+        # Add economic context to state summary
+        for state in self.state_summary['state']:
+            if state in state_data:
+                self.state_summary.loc[self.state_summary['state'] == state, 'population'] = state_data[state]['population']
+                self.state_summary.loc[self.state_summary['state'] == state, 'gdp_per_capita'] = state_data[state]['gdp_per_capita']
+                self.state_summary.loc[self.state_summary['state'] == state, 'tier'] = state_data[state]['tier']
+                self.state_summary.loc[self.state_summary['state'] == state, 'urban_rate'] = state_data[state]['urban_rate']
         
-        # Calculate market penetration rate (customers per 1000 population)
+        # Calculate realistic market penetration rate (customers per 1000 urban population)
+        self.state_summary['urban_population'] = self.state_summary['population'] * self.state_summary['urban_rate']
         self.state_summary['penetration_rate'] = (
-            self.state_summary['customer_count'] / self.state_summary['population'] * 1000
+            self.state_summary['customer_count'] / self.state_summary['urban_population'] * 1000
         )
         
-        # Calculate untapped potential
-        # Assume national average penetration rate as benchmark
-        national_avg_penetration = self.state_summary['customer_count'].sum() / self.state_summary['population'].sum() * 1000
+        # Calculate tier-specific penetration benchmarks (more realistic than national average)
+        tier_benchmarks = {}
+        for tier in [1, 2, 3]:
+            tier_states = self.state_summary[self.state_summary['tier'] == tier]
+            if len(tier_states) > 0:
+                tier_benchmarks[tier] = (
+                    tier_states['customer_count'].sum() / tier_states['urban_population'].sum() * 1000
+                )
         
+        # Calculate untapped potential using tier-specific benchmarks
+        self.state_summary['benchmark_penetration'] = self.state_summary['tier'].map(tier_benchmarks)
+        
+        # Only consider untapped potential where current penetration is below benchmark
         self.state_summary['untapped_customers'] = np.maximum(
             0,
-            (national_avg_penetration * self.state_summary['population'] / 1000) - self.state_summary['customer_count']
+            (self.state_summary['benchmark_penetration'] * self.state_summary['urban_population'] / 1000) - 
+            self.state_summary['customer_count']
         )
         
-        # Potential revenue based on national average revenue per customer
+        # Adjust untapped potential by economic capacity (GDP per capita factor)
+        national_avg_gdp = self.state_summary['gdp_per_capita'].mean()
+        self.state_summary['economic_factor'] = np.minimum(
+            2.0,  # Cap at 2x to avoid extreme values
+            self.state_summary['gdp_per_capita'] / national_avg_gdp
+        )
+        
+        self.state_summary['adjusted_untapped_customers'] = (
+            self.state_summary['untapped_customers'] * self.state_summary['economic_factor']
+        )
+        
+        # Calculate potential revenue with economic adjustment
         national_avg_revenue_per_customer = self.state_summary['total_revenue'].sum() / self.state_summary['customer_count'].sum()
         
         self.state_summary['untapped_revenue_potential'] = (
-            self.state_summary['untapped_customers'] * national_avg_revenue_per_customer
+            self.state_summary['adjusted_untapped_customers'] * 
+            national_avg_revenue_per_customer * 
+            self.state_summary['economic_factor']
         )
         
-        # Market potential score (0-1, higher is better)
-        max_untapped = self.state_summary['untapped_customers'].max()
-        if max_untapped > 0:
+        # Market potential score based on absolute opportunity size and economic viability
+        max_revenue_potential = self.state_summary['untapped_revenue_potential'].max()
+        if max_revenue_potential > 0:
             self.state_summary['market_potential_score'] = (
-                self.state_summary['untapped_customers'] / max_untapped
+                self.state_summary['untapped_revenue_potential'] / max_revenue_potential
             )
         else:
             self.state_summary['market_potential_score'] = 0
@@ -366,32 +415,62 @@ class MarketExpansionAnalyzer:
   
     def generate_expansion_opportunity_matrix(self):
         """
-        Generate comprehensive expansion opportunity matrix and recommendations.
+        Generate comprehensive expansion opportunity matrix with business-realistic scoring.
         Addresses Requirement 2.5
         """
-        logger.info("Generating expansion opportunity matrix...")
+        logger.info("Generating business-realistic expansion opportunity matrix...")
         
-        # Create comprehensive opportunity score
-        # Normalize all metrics to 0-1 scale for combination
-        metrics_to_normalize = [
-            'market_opportunity_score', 'market_potential_score', 
-            'seller_efficiency_score', 'delivery_efficiency_score'
-        ]
+        # Calculate market size score (population + economic strength)
+        max_population = self.state_summary['population'].max()
+        max_gdp_per_capita = self.state_summary['gdp_per_capita'].max()
         
-        for metric in metrics_to_normalize:
-            if metric in self.state_summary.columns:
-                max_val = self.state_summary[metric].max()
-                if max_val > 0:
-                    self.state_summary[f'{metric}_normalized'] = self.state_summary[metric] / max_val
-                else:
-                    self.state_summary[f'{metric}_normalized'] = 0
+        self.state_summary['market_size_score'] = (
+            (self.state_summary['population'] / max_population) * 0.6 +
+            (self.state_summary['gdp_per_capita'] / max_gdp_per_capita) * 0.4
+        )
         
-        # Combined expansion opportunity score (weighted average)
+        # Calculate growth potential score (untapped potential + low current penetration)
+        max_untapped_revenue = self.state_summary['untapped_revenue_potential'].max()
+        max_penetration = self.state_summary['penetration_rate'].max()
+        
+        if max_untapped_revenue > 0:
+            untapped_score = self.state_summary['untapped_revenue_potential'] / max_untapped_revenue
+        else:
+            untapped_score = 0
+            
+        if max_penetration > 0:
+            # Invert penetration rate - lower penetration = higher growth potential
+            growth_potential_score = 1 - (self.state_summary['penetration_rate'] / max_penetration)
+        else:
+            growth_potential_score = 0
+            
+        self.state_summary['growth_potential_score'] = (
+            untapped_score * 0.7 + growth_potential_score * 0.3
+        )
+        
+        # Calculate operational feasibility score (delivery performance + infrastructure)
+        max_delivery_days = self.state_summary['avg_delivery_days'].max()
+        if max_delivery_days > 0:
+            delivery_score = 1 - (self.state_summary['avg_delivery_days'] / max_delivery_days)
+        else:
+            delivery_score = 1.0
+            
+        # Urban rate as infrastructure proxy
+        infrastructure_score = self.state_summary['urban_rate']
+        
+        self.state_summary['operational_feasibility_score'] = (
+            delivery_score * 0.6 + infrastructure_score * 0.4
+        )
+        
+        # Calculate competitive landscape score (seller efficiency)
+        self.state_summary['competitive_score'] = self.state_summary['seller_efficiency_score'].fillna(0.5)
+        
+        # Combined expansion opportunity score with business-realistic weights
         weights = {
-            'market_opportunity_score_normalized': 0.3,  # Current market opportunity
-            'market_potential_score_normalized': 0.3,    # Untapped potential
-            'seller_efficiency_score_normalized': 0.2,   # Seller distribution efficiency
-            'delivery_efficiency_score_normalized': 0.2  # Delivery performance
+            'market_size_score': 0.35,           # Market size is crucial
+            'growth_potential_score': 0.30,      # Growth potential is key
+            'operational_feasibility_score': 0.20, # Operations must be feasible
+            'competitive_score': 0.15            # Competition matters but less
         }
         
         self.state_summary['combined_opportunity_score'] = 0
@@ -401,12 +480,38 @@ class MarketExpansionAnalyzer:
                     self.state_summary[metric].fillna(0) * weight
                 )
         
-        # Expansion priority categories
-        self.state_summary['expansion_priority'] = pd.cut(
-            self.state_summary['combined_opportunity_score'],
-            bins=[0, 0.3, 0.6, 0.8, 1.0],
-            labels=['Low Priority', 'Medium Priority', 'High Priority', 'Critical Priority']
-        )
+        # Expansion priority categories with business logic
+        def categorize_expansion_priority(row):
+            score = row['combined_opportunity_score']
+            tier = row['tier']
+            population = row['population']
+            
+            # Tier 1 states (major economic centers) - focus on optimization
+            if tier == 1:
+                if score >= 0.6:
+                    return 'Optimization Priority'
+                else:
+                    return 'Maintain & Optimize'
+            
+            # Tier 2 states (regional capitals) - main expansion targets
+            elif tier == 2:
+                if score >= 0.7:
+                    return 'High Priority'
+                elif score >= 0.5:
+                    return 'Medium Priority'
+                else:
+                    return 'Low Priority'
+            
+            # Tier 3 states (smaller markets) - selective expansion
+            else:
+                if score >= 0.6 and population > 2000000:  # Only larger Tier 3 states
+                    return 'Medium Priority'
+                elif score >= 0.4 and population > 1000000:
+                    return 'Low Priority'
+                else:
+                    return 'Not Recommended'
+        
+        self.state_summary['expansion_priority'] = self.state_summary.apply(categorize_expansion_priority, axis=1)
         
         # Create expansion opportunity matrix
         self.expansion_opportunities = self.state_summary.copy()
@@ -454,28 +559,50 @@ class MarketExpansionAnalyzer:
         return self.expansion_opportunities, recommendations
     
     def _generate_state_recommendations(self, state_data):
-        """Generate specific recommendations for a state based on its metrics."""
+        """Generate business-realistic recommendations for a state based on its metrics and tier."""
         recommendations = []
+        state = state_data['state']
+        tier = state_data.get('tier', 3)
+        population = state_data.get('population', 0)
+        gdp_per_capita = state_data.get('gdp_per_capita', 0)
         
-        # Seller distribution recommendations
-        if state_data.get('seller_gap', 0) > 10:
-            recommendations.append(f"Recruit {int(state_data['seller_gap'])} additional sellers to meet demand")
-        elif state_data.get('seller_oversupply', 0) > 5:
-            recommendations.append("Consider seller consolidation or expansion to nearby states")
+        # Tier-specific recommendations
+        if tier == 1:  # Major economic centers
+            recommendations.append("Focus on market share optimization and premium services")
+            if state_data.get('seller_gap', 0) > 50:
+                recommendations.append(f"Scale seller network - recruit {int(state_data['seller_gap'])} additional premium sellers")
+            if state_data.get('avg_delivery_days', 0) > 10:
+                recommendations.append("Invest in same-day/next-day delivery infrastructure")
+                
+        elif tier == 2:  # Regional capitals - main expansion targets
+            if state_data.get('untapped_revenue_potential', 0) > 5000000:  # > 5M potential
+                recommendations.append("HIGH PRIORITY: Launch comprehensive market entry strategy")
+                recommendations.append(f"Target market size: {population/1000000:.1f}M people, GDP per capita: R${gdp_per_capita:,.0f}")
+            
+            if state_data.get('seller_gap', 0) > 20:
+                recommendations.append(f"Recruit {int(state_data['seller_gap'])} sellers through regional partnerships")
+            
+            if state_data.get('penetration_rate', 0) < 3:  # Low penetration in major market
+                recommendations.append("Launch aggressive customer acquisition campaign")
+                
+        else:  # Tier 3 - selective expansion
+            if population > 2000000 and state_data.get('untapped_revenue_potential', 0) > 2000000:
+                recommendations.append("Consider selective market entry with local partnerships")
+            elif population < 1000000:
+                recommendations.append("NOT RECOMMENDED: Market too small for profitable expansion")
+                return recommendations
         
-        # Market penetration recommendations
-        if state_data.get('penetration_rate', 0) < 5:  # Less than 5 customers per 1000 population
-            recommendations.append("Focus on customer acquisition through targeted marketing")
+        # Universal delivery recommendations
+        if state_data.get('avg_delivery_days', 0) > 25:
+            recommendations.append("CRITICAL: Establish regional distribution center")
+        elif state_data.get('avg_delivery_days', 0) > 15:
+            recommendations.append("Improve logistics partnerships for faster delivery")
         
-        # Delivery performance recommendations
-        if state_data.get('avg_delivery_days', 0) > 20:
-            recommendations.append("Improve delivery infrastructure and logistics partnerships")
-        elif state_data.get('on_time_rate', 1) < 0.7:
-            recommendations.append("Enhance delivery time estimation and fulfillment processes")
-        
-        # Revenue opportunity recommendations
-        if state_data.get('untapped_revenue_potential', 0) > 1000000:  # > 1M potential
-            recommendations.append("High revenue potential - prioritize comprehensive market entry strategy")
+        # Economic context recommendations
+        if gdp_per_capita < 20000:
+            recommendations.append("Focus on value-oriented products and flexible payment options")
+        elif gdp_per_capita > 40000:
+            recommendations.append("Opportunity for premium products and services")
         
         return recommendations
     

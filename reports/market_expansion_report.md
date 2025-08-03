@@ -1,5 +1,5 @@
 # Market Expansion Analysis Report
-Generated on: 2025-08-03 05:56:59
+Generated on: 2025-08-03 11:25:38
 
 ## Executive Summary
 
@@ -13,9 +13,9 @@ efficiency, and provides actionable recommendations for geographic expansion.
 
 **Market Penetration:** States with very low penetration (3 total): AC, AP, RR
 
-**Untapped Potential:** Total untapped revenue potential: R$ 4,392,602.91
+**Untapped Potential:** Total untapped revenue potential: R$ 1,939,946.06
 
-**Untapped Potential:** States with highest untapped customer potential: BA, PA, CE, PE, MA
+**Untapped Potential:** States with highest untapped customer potential: MG, PE, CE, RJ, BA
 
 **Seller Distribution:** Total seller gap across all states: 938 additional sellers needed
 
@@ -29,9 +29,9 @@ efficiency, and provides actionable recommendations for geographic expansion.
 
 **Delivery Performance:** States needing delivery improvement: RR, AP, AM, AL, PA
 
-**Expansion Opportunities:** Top 5 expansion priority states: BA, CE, PE, PR, GO
+**Expansion Opportunities:** Top 5 expansion priority states: MG, SP, RJ, PR, DF
 
-**Expansion Opportunities:** Expansion priority distribution: {'Medium Priority': np.int64(22), 'High Priority': np.int64(5), 'Low Priority': np.int64(0), 'Critical Priority': np.int64(0)}
+**Expansion Opportunities:** Expansion priority distribution: {'Not Recommended': np.int64(13), 'Low Priority': np.int64(10), 'Maintain & Optimize': np.int64(2), 'Optimization Priority': np.int64(2)}
 
 
 ## Detailed Analysis Results
@@ -39,22 +39,22 @@ efficiency, and provides actionable recommendations for geographic expansion.
 ### Market Penetration Summary
 - Total states analyzed: 27
 - States with high expansion priority: 0
-- States with medium expansion priority: 5
+- States with medium expansion priority: 0
 
 ### Top 10 Expansion Opportunities
 
 | Rank | State | Opportunity Score | Customers | Sellers | Untapped Potential |
 |------|-------|------------------|-----------|---------|-------------------|
-| 1 | BA | 0.681 | 3,380 | 19 | 3,700 |
-| 2 | CE | 0.648 | 1,336 | 13 | 2,967 |
-| 3 | PE | 0.634 | 1,652 | 9 | 2,853 |
-| 4 | PR | 0.630 | 5,045 | 349 | 355 |
-| 5 | GO | 0.611 | 2,020 | 40 | 1,336 |
-| 6 | PA | 0.593 | 975 | 1 | 3,112 |
-| 7 | SC | 0.583 | 3,637 | 190 | 0 |
-| 8 | MA | 0.565 | 747 | 1 | 2,584 |
-| 9 | PB | 0.564 | 536 | 6 | 1,354 |
-| 10 | RN | 0.528 | 485 | 5 | 1,173 |
+| 1 | MG | 0.627 | 11,635 | 244 | 3,371 |
+| 2 | SP | 0.615 | 41,746 | 1,849 | 0 |
+| 3 | RJ | 0.527 | 12,852 | 171 | 1,114 |
+| 4 | PR | 0.453 | 5,045 | 349 | 0 |
+| 5 | DF | 0.448 | 2,140 | 30 | 334 |
+| 6 | SC | 0.418 | 3,637 | 190 | 0 |
+| 7 | RS | 0.394 | 5,466 | 129 | 0 |
+| 8 | GO | 0.384 | 2,020 | 40 | 522 |
+| 9 | MT | 0.318 | 907 | 4 | 239 |
+| 10 | MS | 0.314 | 715 | 5 | 242 |
 
 ### Delivery Performance Analysis
 
