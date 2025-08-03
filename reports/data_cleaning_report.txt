@@ -1,0 +1,123 @@
+================================================================================
+DATA CLEANING REPORT
+================================================================================
+Generated on: 2025-08-03 04:30:22
+
+📋 CLEANING ACTIONS SUMMARY:
+   • IMPUTE_MISSING_DELIVERY_DATE: 1 operations
+   • IMPUTE_MISSING_CARRIER_DATE: 1 operations
+   • FILL_MISSING_CATEGORY: 1 operations
+   • IMPUTE_MISSING_DIMENSIONS: 4 operations
+   • FIX_INVALID_DIMENSIONS: 1 operations
+   • PRESERVE_MISSING_REVIEWS: 1 operations
+   • FIX_INVALID_PAYMENTS: 1 operations
+   • REMOVE_DUPLICATES: 1 operations
+   • CONVERT_DATETIME: 8 operations
+   • CONVERT_CATEGORY: 10 operations
+   • HANDLE_MISSING_TRANSLATIONS: 1 operations
+   • MERGE_CATEGORIES: 1 operations
+   • CREATE_DELIVERY_METRICS: 1 operations
+   • CREATE_TIME_FEATURES: 1 operations
+   • CREATE_PRODUCT_METRICS: 1 operations
+   • VALIDATE_FOREIGN_KEYS: 6 operations
+
+📊 DATASET SIZE CHANGES:
+   • customers: 99,441 rows, 5 columns
+   • geolocation: 19,015 rows, 5 columns
+   • order_items: 112,650 rows, 7 columns
+   • order_payments: 103,886 rows, 5 columns
+   • order_reviews: 99,224 rows, 7 columns
+   • orders: 99,441 rows, 15 columns
+   • products: 32,951 rows, 12 columns
+   • sellers: 3,095 rows, 4 columns
+   • product_categories: 71 rows, 2 columns
+
+🔗 FOREIGN KEY VALIDATION:
+   • customers_orders: GOOD (0 orphaned records)
+   • orders_order_items: GOOD (0 orphaned records)
+   • orders_order_payments: GOOD (0 orphaned records)
+   • orders_order_reviews: GOOD (0 orphaned records)
+   • products_order_items: GOOD (0 orphaned records)
+   • sellers_order_items: GOOD (0 orphaned records)
+
+📝 DETAILED ACTION LOG:
+   [2025-08-03 04:30:17] IMPUTE_MISSING_DELIVERY_DATE - orders
+      Filled 8 missing delivery dates with estimated dates for delivered orders
+   [2025-08-03 04:30:17] IMPUTE_MISSING_CARRIER_DATE - orders
+      Estimated 2 missing carrier delivery dates
+   [2025-08-03 04:30:17] FILL_MISSING_CATEGORY - products
+      Filled 610 missing product categories with 'unknown'
+   [2025-08-03 04:30:17] IMPUTE_MISSING_DIMENSIONS - products
+      Imputed 2 missing values in product_weight_g using category medians
+   [2025-08-03 04:30:17] FIX_INVALID_DIMENSIONS - products
+      Fixed 4 invalid (<=0) values in product_weight_g
+   [2025-08-03 04:30:17] IMPUTE_MISSING_DIMENSIONS - products
+      Imputed 2 missing values in product_length_cm using category medians
+   [2025-08-03 04:30:17] IMPUTE_MISSING_DIMENSIONS - products
+      Imputed 2 missing values in product_height_cm using category medians
+   [2025-08-03 04:30:17] IMPUTE_MISSING_DIMENSIONS - products
+      Imputed 2 missing values in product_width_cm using category medians
+   [2025-08-03 04:30:17] PRESERVE_MISSING_REVIEWS - order_reviews
+      Preserved 87656 missing review titles and 58247 missing review messages as valid business case
+   [2025-08-03 04:30:17] FIX_INVALID_PAYMENTS - order_payments
+      Fixed 9 invalid (<=0) payment values
+   [2025-08-03 04:30:18] REMOVE_DUPLICATES - geolocation
+      Removed 981,148 duplicate records (98.1%)
+   [2025-08-03 04:30:19] CONVERT_DATETIME - orders
+      Converted order_purchase_timestamp from object to datetime64
+   [2025-08-03 04:30:20] CONVERT_DATETIME - orders
+      Converted order_approved_at from object to datetime64
+   [2025-08-03 04:30:20] CONVERT_DATETIME - orders
+      Converted order_delivered_carrier_date from object to datetime64
+   [2025-08-03 04:30:20] CONVERT_DATETIME - orders
+      Converted order_delivered_customer_date from object to datetime64
+   [2025-08-03 04:30:20] CONVERT_DATETIME - orders
+      Converted order_estimated_delivery_date from object to datetime64
+   [2025-08-03 04:30:20] CONVERT_DATETIME - order_items
+      Converted shipping_limit_date from object to datetime64
+   [2025-08-03 04:30:20] CONVERT_DATETIME - order_reviews
+      Converted review_creation_date from object to datetime64
+   [2025-08-03 04:30:21] CONVERT_DATETIME - order_reviews
+      Converted review_answer_timestamp from object to datetime64
+   [2025-08-03 04:30:21] CONVERT_CATEGORY - customers
+      Converted customer_city from object to category
+   [2025-08-03 04:30:21] CONVERT_CATEGORY - customers
+      Converted customer_state from object to category
+   [2025-08-03 04:30:21] CONVERT_CATEGORY - geolocation
+      Converted geolocation_city from object to category
+   [2025-08-03 04:30:21] CONVERT_CATEGORY - geolocation
+      Converted geolocation_state from object to category
+   [2025-08-03 04:30:21] CONVERT_CATEGORY - order_items
+      Converted seller_id from object to category
+   [2025-08-03 04:30:21] CONVERT_CATEGORY - order_payments
+      Converted payment_type from object to category
+   [2025-08-03 04:30:21] CONVERT_CATEGORY - order_reviews
+      Converted review_comment_title from object to category
+   [2025-08-03 04:30:21] CONVERT_CATEGORY - orders
+      Converted order_status from object to category
+   [2025-08-03 04:30:21] CONVERT_CATEGORY - sellers
+      Converted seller_state from object to category
+   [2025-08-03 04:30:21] HANDLE_MISSING_TRANSLATIONS - products
+      Used Portuguese names as English translations for 623 products
+   [2025-08-03 04:30:21] MERGE_CATEGORIES - products
+      Successfully merged category translations for 32951 products
+   [2025-08-03 04:30:21] CONVERT_CATEGORY - products
+      Converted product_category_name from object to category after merge
+   [2025-08-03 04:30:21] CREATE_DELIVERY_METRICS - orders
+      Created delivery performance metrics for 96484 orders
+   [2025-08-03 04:30:21] CREATE_TIME_FEATURES - orders
+      Created temporal features (year, month, day_of_week, hour)
+   [2025-08-03 04:30:21] CREATE_PRODUCT_METRICS - products
+      Created volume and density metrics for 32951 products
+   [2025-08-03 04:30:21] VALIDATE_FOREIGN_KEYS - customers->orders
+      Orphaned records: 0 (0.00%)
+   [2025-08-03 04:30:21] VALIDATE_FOREIGN_KEYS - orders->order_items
+      Orphaned records: 0 (0.00%)
+   [2025-08-03 04:30:22] VALIDATE_FOREIGN_KEYS - orders->order_payments
+      Orphaned records: 0 (0.00%)
+   [2025-08-03 04:30:22] VALIDATE_FOREIGN_KEYS - orders->order_reviews
+      Orphaned records: 0 (0.00%)
+   [2025-08-03 04:30:22] VALIDATE_FOREIGN_KEYS - products->order_items
+      Orphaned records: 0 (0.00%)
+   [2025-08-03 04:30:22] VALIDATE_FOREIGN_KEYS - sellers->order_items
+      Orphaned records: 0 (0.00%)
