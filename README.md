@@ -175,8 +175,7 @@ This project is created for educational and portfolio purposes.
 
 ## 👤 Author
 
-**[Your Name]**
-- Portfolio: [Your Portfolio URL]
+**Abdallah Maarouf Sayed**
 - LinkedIn: [Your LinkedIn Profile]
 - GitHub: [Your GitHub Profile]
 
