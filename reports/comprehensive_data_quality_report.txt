@@ -1,0 +1,31 @@
+================================================================================
+COMPREHENSIVE DATA QUALITY REPORT
+================================================================================
+Generated on: 2025-08-03 03:49:38
+
+📊 DATASET OVERVIEW:
+   • Total datasets: 9
+   • Total rows: 1,550,922
+   • Total columns: 52
+
+🔍 MISSING VALUES ANALYSIS:
+   • Critical issues (>50% missing): 2
+   • High issues (20-50% missing): 0
+   • Critical columns:
+     - order_reviews.review_comment_title: 88.3%
+     - order_reviews.review_comment_message: 58.7%
+
+🔄 DUPLICATE ANALYSIS:
+   • Datasets with significant duplicates: 1
+     - geolocation: 26.2% (261,831 rows)
+
+🔗 FOREIGN KEY INTEGRITY:
+   • All foreign key relationships are intact
+
+💡 RECOMMENDATIONS:
+   1. Address critical missing value issues (>50% missing) - consider if these columns are necessary
+   2. Remove duplicate records, especially from geolocation dataset
+   3. Convert date columns to proper datetime format
+   4. Consider converting categorical columns to category dtype for memory efficiency
+   5. Create data validation rules for future data ingestion
+   6. Implement data quality monitoring for ongoing data updates
