@@ -502,8 +502,17 @@ if __name__ == "__main__":
     print("Starting data validation on cleaned datasets...")
     
     try:
-        # Load and clean data
-        cleaned_datasets, cleaning_report = clean_brazilian_ecommerce_data()
+        # Load cleaned data from saved files
+        from save_cleaned_data import load_cleaned_datasets
+        print("📂 Loading cleaned datasets from files...")
+        cleaned_datasets = load_cleaned_datasets()
+        
+        if not cleaned_datasets:
+            print("❌ No cleaned datasets found. Loading and cleaning fresh data...")
+            # Fallback to fresh cleaning if files don't exist
+            cleaned_datasets, cleaning_report = clean_brazilian_ecommerce_data()
+        else:
+            print(f"✅ Loaded {len(cleaned_datasets)} datasets from saved files")
         
         # Validate cleaned data
         validation_passed, validation_report = validate_cleaned_data(cleaned_datasets)
@@ -515,7 +524,12 @@ if __name__ == "__main__":
         import os
         os.makedirs('reports', exist_ok=True)
         
+        # Save to both reports and cleaned data directory
         with open('reports/data_validation_report.txt', 'w', encoding='utf-8') as f:
+            f.write(validation_report)
+        
+        # Also save in cleaned data directory
+        with open('data/cleaned/validation_report_saved_data.txt', 'w', encoding='utf-8') as f:
             f.write(validation_report)
         
         if validation_passed:

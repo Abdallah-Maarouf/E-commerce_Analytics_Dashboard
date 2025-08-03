@@ -1,0 +1,59 @@
+CLEANED DATASETS SUMMARY
+==================================================
+
+customers:
+  - Rows: 99,441
+  - Columns: 5
+  - Memory: 18.3 MB
+  - File: cleaned_customers.csv
+
+geolocation:
+  - Rows: 19,015
+  - Columns: 5
+  - Memory: 1.2 MB
+  - File: cleaned_geolocation.csv
+
+order_items:
+  - Rows: 112,650
+  - Columns: 7
+  - Memory: 23.1 MB
+  - File: cleaned_order_items.csv
+
+order_payments:
+  - Rows: 103,886
+  - Columns: 5
+  - Memory: 11.3 MB
+  - File: cleaned_order_payments.csv
+
+order_reviews:
+  - Rows: 99,224
+  - Columns: 7
+  - Memory: 27.0 MB
+  - File: cleaned_order_reviews.csv
+
+orders:
+  - Rows: 99,441
+  - Columns: 15
+  - Memory: 27.2 MB
+  - File: cleaned_orders.csv
+
+products:
+  - Rows: 32,951
+  - Columns: 12
+  - Memory: 7.3 MB
+  - File: cleaned_products.csv
+
+sellers:
+  - Rows: 3,095
+  - Columns: 4
+  - Memory: 0.5 MB
+  - File: cleaned_sellers.csv
+
+product_categories:
+  - Rows: 71
+  - Columns: 2
+  - Memory: 0.0 MB
+  - File: cleaned_product_categories.csv
+
+Total Memory Usage: 115.9 MB
+Total Datasets: 9

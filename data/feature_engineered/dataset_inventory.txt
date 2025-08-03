@@ -1,0 +1,21 @@
+# Feature-Engineered Datasets Inventory
+# Generated on: 2025-08-03 05:09:25
+
+## Available Datasets:
+
+- customer_analytics.csv
+- market_expansion.csv
+- payment_operations.csv
+- product_performance.csv
+- seasonal_intelligence_category_patterns.csv
+- seasonal_intelligence_cultural_events.csv
+- seasonal_intelligence_monthly_trends.csv
+- seasonal_intelligence_seasonal_variance.csv
+
+## Dataset Descriptions:
+
+- market_expansion.csv: Geographic analysis data for market expansion decisions
+- customer_analytics.csv: Customer behavior and RFM analysis data
+- seasonal_intelligence_*.csv: Seasonal patterns and demand forecasting data
+- payment_operations.csv: Payment behavior and operational metrics
+- product_performance.csv: Product sales and performance analytics

@@ -1,0 +1,64 @@
+# Feature Dictionary
+# Generated on: 2025-08-03 05:09:19
+
+delivery_days: Number of days from purchase to delivery
+delivery_speed_category: Categorical delivery speed classification
+delivery_vs_estimate_days: Days difference between actual and estimated delivery
+on_time_delivery: Boolean flag for on-time delivery performance
+delivery_accuracy: Categorical delivery accuracy vs estimate
+processing_days: Days from purchase to carrier pickup
+shipping_days: Days from carrier pickup to customer delivery
+order_quarter: Quarter of the year when order was placed
+order_day_name: Day of the week name when order was placed
+order_week_of_year: Week number of the year when order was placed
+is_weekend: Boolean flag for weekend orders
+is_holiday_season: Boolean flag for holiday season orders (Nov-Dec)
+is_carnival_season: Boolean flag for carnival season orders (Feb-Mar)
+is_mothers_day_season: Boolean flag for Mother's Day season orders (May)
+is_valentines_season: Boolean flag for Valentine's Day season orders (June)
+total_orders: Total orders from location
+total_revenue: Total revenue from location
+avg_order_value: Average order value in location
+days_since_last_order: Number of days since customer's last order (Recency)
+customer_lifetime_days: Number of days between first and last order
+order_frequency_per_month: Average number of orders per month
+recency_score: RFM Recency score (1-5, 5 being most recent)
+frequency_score: RFM Frequency score (1-5, 5 being most frequent)
+monetary_score: RFM Monetary score (1-5, 5 being highest value)
+rfm_score: Combined RFM score (111-555)
+customer_segment: Customer segment based on RFM analysis
+estimated_clv: Estimated Customer Lifetime Value
+clv_category: Customer value category (Low/Medium/High/VIP)
+customer_status: Customer activity status (Active/Inactive/Churned)
+is_repeat_customer: Boolean flag for customers with multiple orders
+unique_orders: Number of unique orders containing this product
+total_quantity_sold: Total quantity of product sold
+avg_price: Average selling price of product
+revenue_per_order: Average revenue per order containing this product
+avg_quantity_per_order: Average quantity sold per order
+price_coefficient_variation: Price variability indicator (std/mean)
+total_reviews: Total number of reviews for product
+avg_review_score: Average review score (1-5)
+review_comment_rate: Percentage of reviews with written comments
+review_category: Review quality category
+sales_performance: Sales performance quartile
+revenue_performance: Revenue performance quartile
+popularity_score: Combined popularity score (0-1)
+product_lifecycle: Product lifecycle stage
+category_sales_share: Product's share of category sales
+category_revenue_share: Product's share of category revenue
+customer_count: Number of customers in location
+seller_count: Number of sellers in location
+orders_per_customer: Average orders per customer in location
+customer_to_seller_ratio: Ratio of customers to sellers
+revenue_per_customer: Average revenue per customer
+market_opportunity_score: Market expansion opportunity score (0-1)
+state_customers: Total customers in state
+state_revenue_per_customer: Average revenue per customer in state
+monthly_orders: Number of orders per month
+monthly_revenue: Total revenue per month
+monthly_customers: Unique customers per month
+seasonal_variance: Revenue variability coefficient for category
+category_orders: Orders per category per month
+category_revenue: Revenue per category per month
+event_type: Brazilian cultural event type for month
