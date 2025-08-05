@@ -234,6 +234,20 @@ def load_brazilian_ecommerce_data(data_dir: str = "data") -> Tuple[Dict[str, pd.
     return datasets, summary
 
 
+def load_all_data(data_dir: str = "data") -> Dict[str, pd.DataFrame]:
+    """
+    Wrapper function for compatibility with testing suite.
+    
+    Args:
+        data_dir (str): Path to data directory
+        
+    Returns:
+        Dict[str, pd.DataFrame]: Dictionary containing all loaded datasets
+    """
+    datasets, _ = load_brazilian_ecommerce_data(data_dir)
+    return datasets
+
+
 if __name__ == "__main__":
     # Example usage
     print("Loading Brazilian E-commerce Dataset...")

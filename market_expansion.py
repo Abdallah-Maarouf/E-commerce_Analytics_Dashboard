@@ -1007,5 +1007,13 @@ def main():
     else:
         print("Market expansion analysis failed. Check logs for details.")
 
+def analyze():
+    """
+    Wrapper function for compatibility with testing suite.
+    Runs the complete market expansion analysis.
+    """
+    analyzer = MarketExpansionAnalyzer()
+    return analyzer.run_complete_analysis()
+
 if __name__ == "__main__":
     main()

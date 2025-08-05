@@ -753,5 +753,18 @@ def main():
         raise
 
 
+def analyze():
+    """
+    Wrapper function for compatibility with testing suite.
+    Runs the complete payment operations analysis.
+    """
+    try:
+        from payment_operations import PaymentOperationsAnalyzer
+        analyzer = PaymentOperationsAnalyzer()
+        return analyzer.run_complete_analysis()
+    except Exception as e:
+        print(f"Payment operations analysis failed: {str(e)}")
+        return False
+
 if __name__ == "__main__":
     main()

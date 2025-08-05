@@ -1,0 +1,38 @@
+
+/* Responsive Design Improvements */
+@media (max-width: 768px) {
+    .main .block-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    
+    .metric-container {
+        flex-direction: column;
+    }
+    
+    .chart-container {
+        width: 100% !important;
+        height: auto !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar .sidebar-content {
+        width: 100%;
+    }
+    
+    .metric-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Improved Chart Responsiveness */
+.plotly-graph-div {
+    width: 100% !important;
+    height: auto !important;
+}
+
+/* Better Mobile Navigation */
+.sidebar .sidebar-content .sidebar-wrapper {
+    overflow-x: auto;
+}

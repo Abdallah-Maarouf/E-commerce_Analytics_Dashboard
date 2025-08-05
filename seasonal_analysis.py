@@ -1209,6 +1209,19 @@ def main():
     return results
 
 
+def analyze():
+    """
+    Wrapper function for compatibility with testing suite.
+    Runs the complete seasonal analysis.
+    """
+    try:
+        from seasonal_analysis import SeasonalAnalyzer
+        analyzer = SeasonalAnalyzer()
+        return analyzer.run_complete_analysis()
+    except Exception as e:
+        print(f"Seasonal analysis failed: {str(e)}")
+        return False
+
 if __name__ == "__main__":
     import os
     results = main()
