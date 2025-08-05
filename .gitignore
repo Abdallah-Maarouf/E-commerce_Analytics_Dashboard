@@ -181,3 +181,6 @@ models/
 # Output files
 output/
 results/
+
+# Kiro IDE files
+.kiro/
