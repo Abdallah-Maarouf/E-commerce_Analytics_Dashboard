@@ -1,0 +1,13 @@
+month,monthly_total_revenue,avg_order_value,order_count,unique_customers,total_items,event_name,event_type,expected_impact,revenue_vs_average,orders_vs_average
+5,1735972.77,165.12629791686484,10513,10573,12061.0,Mothers Day,commercial,high,31.48,27.86
+8,1671513.07,155.56194229874362,10745,10843,12158.0,Fathers Day,commercial,medium,26.6,30.68
+7,1643699.65,160.48619898457332,10242,10318,11611.0,Winter Vacation,seasonal,medium,24.49,24.57
+3,1587175.41,161.47882897548072,9829,9893,11217.0,Carnival (extended),cultural,medium,20.21,19.54
+4,1572120.28,168.5919871313673,9325,9343,10659.0,Easter,holiday,low,19.07,13.41
+6,1525640.15,162.70023994881092,9377,9412,10661.0,Valentines Day (Brazil),commercial,medium,15.55,14.05
+2,1273189.58,151.0845591550967,8427,8508,9623.0,Carnival,cultural,high,-3.57,2.49
+1,1244490.38,155.386487701336,8009,8069,9163.0,New Year,holiday,medium,-5.74,-2.59
+11,1179143.77,158.25308951818548,7451,7544,8665.0,Black Friday,commercial,very_high,-10.69,-9.38
+12,863566.85,153.52299555555555,5625,5674,6309.0,Christmas,holiday,very_high,-34.59,-31.59
+10,826121.21,169.42600697292863,4876,4959,5685.0,Childrens Day,commercial,medium,-37.43,-40.7
+9,720920.12,169.7480857075583,4247,4305,4838.0,Independence Day,holiday,low,-45.4,-48.35

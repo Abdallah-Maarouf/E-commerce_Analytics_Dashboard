@@ -1,0 +1,4 @@
+year,month,month_name,predicted_revenue,predicted_orders,revenue_lower_ci,revenue_upper_ci,orders_lower_ci,orders_upper_ci,event_name,expected_impact
+2018,11,November,751445.7168,4743,-186440.0767477114,1689331.5103477114,0,10496,Black Friday,very_high
+2018,12,December,539237.8131,3453,-398647.9804477114,1477123.6066477115,0,9205,Christmas,very_high
+2019,1,January,568314.5728999999,3835,-369571.22064771154,1506200.3664477114,0,9587,New Year,medium
