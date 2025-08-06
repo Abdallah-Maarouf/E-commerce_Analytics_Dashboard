@@ -176,8 +176,8 @@ This project is created for educational and portfolio purposes.
 ## 👤 Author
 
 **Abdallah Maarouf Sayed**
-- LinkedIn: [Your LinkedIn Profile]
-- GitHub: [Your GitHub Profile]
+- LinkedIn: www.linkedin.com/in/abdallah-maarouf-468b08357
+- GitHub: https://github.com/Abdallah-Maarouf
 
 ---
 
