@@ -33,26 +33,8 @@ st.set_page_config(
     }
 )
 
-# Apply modern theme immediately
+# Apply modern theme
 apply_dark_theme()
-
-# Force CSS injection for deployment
-st.markdown("""
-<style>
-/* Ensure critical styles load first */
-.stApp {
-    background: linear-gradient(135deg, #1a1625 0%, #2a1f3d 100%) !important;
-    color: #ffffff !important;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-}
-
-/* Hide Streamlit branding */
-#MainMenu {visibility: hidden;}
-footer {visibility: hidden;}
-header {visibility: hidden;}
-.stDeployButton {display: none;}
-</style>
-""", unsafe_allow_html=True)
 
 def main():
     """Main application with modern top navigation"""

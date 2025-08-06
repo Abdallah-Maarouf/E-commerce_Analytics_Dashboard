@@ -45,6 +45,17 @@ def apply_dark_theme():
     """Apply modern responsive theme with glass morphism"""
     colors = get_theme_colors()
     
+    # Ensure the page has the dark background immediately
+    st.markdown(f"""
+    <style>
+    /* Critical styles first */
+    .stApp {{
+        background: linear-gradient(135deg, {colors['primary_bg']} 0%, {colors['secondary_bg']} 100%) !important;
+        color: {colors['text_primary']} !important;
+    }}
+    </style>
+    """, unsafe_allow_html=True)
+    
     st.markdown(f"""
     <style>
     /* Import modern fonts with fallback */
