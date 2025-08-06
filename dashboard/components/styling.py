@@ -1,143 +1,149 @@
 """
-Dark theme styling and CSS components for the dashboard
+Modern responsive styling with glass morphism effects
 """
 
 import streamlit as st
 
 def get_theme_colors():
-    """Return the dark theme color palette"""
+    """Enhanced color palette for modern design"""
     return {
+        # Base colors
         'primary_bg': '#1a1625',
         'secondary_bg': '#2a1f3d',
-        'card_bg': 'rgba(61, 47, 79, 0.8)',
+        'surface_bg': 'rgba(61, 47, 79, 0.6)',
+        'card_bg': 'rgba(61, 47, 79, 0.6)',  # Alias for surface_bg
+        'glass_bg': 'rgba(255, 255, 255, 0.05)',
+        
+        # Text colors
         'text_primary': '#ffffff',
         'text_secondary': '#e0e0e0',
-        'accent_orange': '#ff9500',
+        'text_muted': '#b0b0b0',
+        
+        # Accent colors
         'accent_blue': '#00d4ff',
+        'accent_purple': '#9c27b0',
+        'accent_orange': '#ff9500',
         'accent_green': '#00e676',
         'accent_pink': '#e91e63',
-        'accent_purple': '#9c27b0',
-        'border_color': '#3d2f4f',
-        'hover_color': '#4a3a5a'
+        
+        # Functional colors
+        'success': '#00e676',
+        'warning': '#ff9500',
+        'error': '#ff5252',
+        'info': '#00d4ff',
+        
+        # Border and shadow
+        'border_light': 'rgba(255, 255, 255, 0.1)',
+        'border_color': 'rgba(255, 255, 255, 0.1)',  # Alias for border_light
+        'border_accent': 'rgba(0, 212, 255, 0.3)',
+        'shadow_light': 'rgba(0, 0, 0, 0.1)',
+        'shadow_medium': 'rgba(0, 0, 0, 0.2)',
+        'shadow_heavy': 'rgba(0, 0, 0, 0.4)'
     }
 
 def apply_dark_theme():
-    """Apply dark theme CSS styling to the Streamlit app"""
+    """Apply modern responsive theme with glass morphism"""
     colors = get_theme_colors()
     
     st.markdown(f"""
     <style>
-    /* Main app background */
+    /* Import modern fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    /* Global styles */
+    * {{
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }}
+    
+    /* Main app container */
     .stApp {{
         background: linear-gradient(135deg, {colors['primary_bg']} 0%, {colors['secondary_bg']} 100%);
         color: {colors['text_primary']};
+        min-height: 100vh;
     }}
     
-    /* Sidebar styling */
-    .css-1d391kg, .css-1lcbmhc, .css-17lntkn, section[data-testid="stSidebar"] {{
-        background: linear-gradient(180deg, {colors['secondary_bg']} 0%, {colors['primary_bg']} 100%);
-        border-right: 2px solid {colors['border_color']};
-    }}
+    /* Hide Streamlit elements */
+    #MainMenu {{visibility: hidden;}}
+    footer {{visibility: hidden;}}
+    header {{visibility: hidden;}}
     
-    /* Sidebar navigation */
-    .css-17eq0hr, .css-pkbazv {{
-        background: transparent;
-        color: {colors['text_primary']};
-    }}
-    
-    /* Sidebar toggle button when sidebar is collapsed */
-    [data-testid="collapsedControl"] {{
-        background: {colors['card_bg']} !important;
-        border: 2px solid {colors['accent_blue']} !important;
-        border-radius: 12px !important;
-        color: {colors['text_primary']} !important;
-        visibility: visible !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        opacity: 1 !important;
-        z-index: 999999 !important;
-        position: fixed !important;
-        top: 1rem !important;
-        left: 1rem !important;
-        width: 3rem !important;
-        height: 3rem !important;
-        padding: 0.5rem !important;
-        transition: all 0.3s ease !important;
-        cursor: pointer !important;
-        pointer-events: auto !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
-    }}
-    
-    [data-testid="collapsedControl"]:hover {{
-        background: {colors['hover_color']} !important;
-        border-color: {colors['accent_purple']} !important;
-        transform: scale(1.1) !important;
-        box-shadow: 0 6px 20px rgba(0, 212, 255, 0.3) !important;
-    }}
-    
-    /* Sidebar toggle button icon */
-    [data-testid="collapsedControl"] svg {{
-        color: {colors['accent_blue']} !important;
-        width: 1.5rem !important;
-        height: 1.5rem !important;
-        filter: drop-shadow(0 0 5px {colors['accent_blue']}40) !important;
-    }}
-    
-    [data-testid="collapsedControl"]:hover svg {{
-        color: {colors['accent_purple']} !important;
-    }}
-    
-    /* Main content area */
-    .main .block-container, .css-18e3th9, .css-1d391kg .css-1lcbmhc {{
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        background: transparent;
-    }}
-    
-    /* Fix main container */
-    .css-k1vhr4, .css-18e3th9 {{
-        background: transparent;
-    }}
-    
-    /* Headers */
-    h1, h2, h3, h4, h5, h6 {{
-        color: {colors['text_primary']} !important;
-        font-weight: 600;
-    }}
-    
+    /* Typography system */
     h1 {{
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
         background: linear-gradient(45deg, {colors['accent_blue']}, {colors['accent_purple']});
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        margin-bottom: 2rem;
     }}
     
-    /* Text elements */
+    h2 {{
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        font-weight: 600;
+        line-height: 1.3;
+        margin-bottom: 1.25rem;
+        color: {colors['text_primary']};
+    }}
+    
+    h3 {{
+        font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+        font-weight: 600;
+        line-height: 1.4;
+        margin-bottom: 1rem;
+        color: {colors['text_primary']};
+    }}
+    
     p, div, span {{
-        color: {colors['text_secondary']} !important;
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        line-height: 1.6;
+        color: {colors['text_secondary']};
     }}
     
-    /* Metrics and KPI cards */
+    /* Glass morphism cards */
+    .glass-card {{
+        background: {colors['glass_bg']};
+        backdrop-filter: blur(20px);
+        border: 1px solid {colors['border_light']};
+        border-radius: 16px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 32px {colors['shadow_medium']};
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }}
+    
+    .glass-card::before {{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, {colors['accent_blue']}, transparent);
+        opacity: 0.5;
+    }}
+    
+    .glass-card:hover {{
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px {colors['shadow_heavy']};
+        border-color: {colors['border_accent']};
+    }}
+    
+    /* Metric cards enhancement */
     [data-testid="metric-container"] {{
-        background: linear-gradient(135deg, {colors['card_bg']}, rgba(61, 47, 79, 0.6)) !important;
-        border: 1px solid {colors['border_color']} !important;
-        border-radius: 12px !important;
+        background: {colors['glass_bg']} !important;
+        backdrop-filter: blur(20px) !important;
+        border: 1px solid {colors['border_light']} !important;
+        border-radius: 16px !important;
         padding: 1.5rem !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-        transition: all 0.3s ease !important;
+        box-shadow: 0 8px 32px {colors['shadow_medium']} !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
         position: relative !important;
         overflow: hidden !important;
     }}
     
-    [data-testid="metric-container"]:hover {{
-        transform: translateY(-2px) !important;
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4) !important;
-        border-color: {colors['accent_purple']} !important;
-    }}
-    
-    /* Metric container top accent line */
     [data-testid="metric-container"]::before {{
         content: '';
         position: absolute;
@@ -146,282 +152,106 @@ def apply_dark_theme():
         right: 0;
         height: 3px;
         background: linear-gradient(90deg, {colors['accent_blue']}, {colors['accent_purple']});
+        border-radius: 16px 16px 0 0;
     }}
     
-    /* Metric labels */
-    [data-testid="metric-container"] [data-testid="metric-label"] {{
-        color: {colors['text_secondary']} !important;
-        font-size: 0.9rem !important;
-        font-weight: 500 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.5px !important;
-        margin-bottom: 0.5rem !important;
+    [data-testid="metric-container"]:hover {{
+        transform: translateY(-4px) !important;
+        box-shadow: 0 12px 40px {colors['shadow_heavy']} !important;
+        border-color: {colors['border_accent']} !important;
     }}
     
-    /* Metric values */
+    /* Metric values styling */
     [data-testid="metric-container"] [data-testid="metric-value"] {{
-        color: {colors['text_primary']} !important;
-        font-size: 2rem !important;
+        font-size: clamp(1.5rem, 4vw, 2.5rem) !important;
         font-weight: 700 !important;
-        background: linear-gradient(45deg, {colors['accent_blue']}, {colors['accent_purple']});
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: {colors['text_primary']} !important;
     }}
     
-    /* Metric deltas */
-    [data-testid="metric-container"] [data-testid="metric-delta"] {{
-        font-size: 0.9rem !important;
+    [data-testid="metric-container"] [data-testid="metric-label"] {{
+        font-size: clamp(0.8rem, 2vw, 1rem) !important;
         font-weight: 500 !important;
-        margin-top: 0.5rem !important;
+        color: {colors['text_secondary']} !important;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }}
     
-    /* Buttons */
-    .stButton > button {{
-        background: linear-gradient(45deg, {colors['accent_purple']}, {colors['accent_blue']});
-        color: {colors['text_primary']};
-        border: none;
-        border-radius: 8px;
-        padding: 0.5rem 1rem;
-        font-weight: 600;
-        transition: all 0.3s ease;
-    }}
-    
-    .stButton > button:hover {{
-        transform: translateY(-1px);
-        box-shadow: 0 4px 15px rgba(156, 39, 176, 0.4);
-    }}
-    
-    /* Selectbox and inputs */
-    .stSelectbox > div > div, .stRadio > div {{
-        background: {colors['card_bg']};
-        border: 1px solid {colors['border_color']};
-        border-radius: 8px;
-        color: {colors['text_primary']};
-    }}
-    
-    /* Radio buttons */
-    .stRadio > div > label {{
-        background: transparent;
-        color: {colors['text_primary']} !important;
-        padding: 0.5rem;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-    }}
-    
-    .stRadio > div > label:hover {{
-        background: {colors['hover_color']};
-    }}
-    
-    .stRadio > div > label > div[data-testid="stMarkdownContainer"] {{
-        color: {colors['text_primary']} !important;
-    }}
-    
-    /* Charts and plotly */
+    /* Chart containers */
     .js-plotly-plot {{
-        background: transparent !important;
+        background: {colors['glass_bg']} !important;
+        backdrop-filter: blur(20px) !important;
+        border: 1px solid {colors['border_light']} !important;
+        border-radius: 16px !important;
+        padding: 1rem !important;
+        box-shadow: 0 8px 32px {colors['shadow_medium']} !important;
     }}
     
-    /* Loading spinner */
-    .stSpinner > div {{
-        border-top-color: {colors['accent_blue']} !important;
-    }}
-    
-    /* Alert messages styling */
-    .stAlert {{
-        background: rgba(233, 30, 99, 0.1) !important;
-        border: 1px solid {colors['accent_pink']} !important;
-        border-radius: 12px !important;
-        color: {colors['text_primary']} !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-    }}
-    
-    /* Success messages */
-    .stSuccess {{
-        background: rgba(0, 230, 118, 0.1) !important;
-        border: 1px solid {colors['accent_green']} !important;
-        border-radius: 12px !important;
-        color: {colors['text_primary']} !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-    }}
-    
-    /* Info messages */
-    .stInfo, [data-testid="stAlert"] {{
-        background: linear-gradient(135deg, {colors['card_bg']}, rgba(61, 47, 79, 0.6)) !important;
-        border: 1px solid {colors['border_color']} !important;
-        border-radius: 12px !important;
-        color: {colors['text_primary']} !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
-        padding: 1.5rem !important;
-    }}
-    
-    /* Info message text */
-    [data-testid="stAlert"] p {{
-        color: {colors['text_secondary']} !important;
-        margin: 0 !important;
-    }}
-    
-    /* Info message icons */
-    [data-testid="stAlert"] [data-testid="stAlertIcon"] {{
-        color: {colors['accent_blue']} !important;
-    }}
-    
-    /* Tabs */
-    .stTabs [data-baseweb="tab-list"] {{
-        background: {colors['card_bg']};
-        border-radius: 8px;
-        padding: 0.5rem;
-    }}
-    
-    .stTabs [data-baseweb="tab"] {{
-        background: transparent;
-        color: {colors['text_secondary']};
-        border-radius: 6px;
-        padding: 0.5rem 1rem;
-        transition: all 0.3s ease;
-    }}
-    
-    .stTabs [aria-selected="true"] {{
-        background: linear-gradient(45deg, {colors['accent_purple']}, {colors['accent_blue']});
-        color: {colors['text_primary']} !important;
-    }}
-    
-    /* Expander */
-    .streamlit-expanderHeader {{
-        background: {colors['card_bg']};
-        border: 1px solid {colors['border_color']};
-        border-radius: 8px;
-        color: {colors['text_primary']};
-    }}
-    
-    /* Custom card styling */
-    .custom-card {{
-        background: linear-gradient(135deg, {colors['card_bg']}, rgba(61, 47, 79, 0.6));
-        border: 1px solid {colors['border_color']};
-        border-radius: 12px;
-        padding: 1.5rem;
-        margin: 1rem 0;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-        transition: all 0.3s ease;
-    }}
-    
-    .custom-card:hover {{
-        transform: translateY(-2px);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
-        border-color: {colors['accent_purple']};
-    }}
-    
-    /* Gradient text */
-    .gradient-text {{
-        background: linear-gradient(45deg, {colors['accent_blue']}, {colors['accent_purple']});
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        font-weight: 600;
-    }}
-    
-    /* Neon accent */
-    .neon-accent {{
-        color: {colors['accent_blue']};
-        text-shadow: 0 0 10px {colors['accent_blue']}40;
-    }}
-    
-    /* Fix Streamlit default styles */
-    .css-17lntkn {{
-        background: transparent;
-    }}
-    
-    /* Alternative selectors for sidebar toggle button */
-    .css-1rs6os, button[kind="header"], button[data-testid="baseButton-header"] {{
-        background: {colors['card_bg']} !important;
-        border: 2px solid {colors['accent_blue']} !important;
-        border-radius: 12px !important;
-        color: {colors['text_primary']} !important;
-        padding: 0.5rem !important;
-        margin: 1rem !important;
-        transition: all 0.3s ease !important;
-        cursor: pointer !important;
-        pointer-events: auto !important;
-        z-index: 999999 !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
-        visibility: visible !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        width: 3rem !important;
-        height: 3rem !important;
-    }}
-    
-    .css-1rs6os:hover, button[kind="header"]:hover, button[data-testid="baseButton-header"]:hover {{
-        background: {colors['hover_color']} !important;
-        border-color: {colors['accent_purple']} !important;
-        transform: scale(1.1) !important;
-        box-shadow: 0 6px 20px rgba(0, 212, 255, 0.3) !important;
-    }}
-    
-    /* Icons in toggle buttons */
-    .css-1rs6os svg, button[kind="header"] svg, button[data-testid="baseButton-header"] svg {{
-        color: {colors['accent_blue']} !important;
-        width: 1.5rem !important;
-        height: 1.5rem !important;
-        filter: drop-shadow(0 0 5px {colors['accent_blue']}40) !important;
-    }}
-    
-    .css-1rs6os:hover svg, button[kind="header"]:hover svg, button[data-testid="baseButton-header"]:hover svg {{
-        color: {colors['accent_purple']} !important;
-    }}
-    
-    /* Hide Streamlit branding */
-    #MainMenu {{visibility: hidden;}}
-    footer {{visibility: hidden;}}
-    header {{visibility: hidden;}}
-    
-    /* Fix text color inheritance */
-    .css-1cpxqw2, .css-16idsys p {{
-        color: {colors['text_secondary']} !important;
-    }}
-    
-    /* Responsive design */
+    /* Mobile optimizations */
     @media (max-width: 768px) {{
-        .main .block-container, .css-18e3th9 {{
-            padding-left: 1rem;
-            padding-right: 1rem;
+        .glass-card {{
+            padding: 1rem;
+            border-radius: 12px;
         }}
         
         [data-testid="metric-container"] {{
-            margin-bottom: 1rem;
+            padding: 1rem !important;
+            border-radius: 12px !important;
         }}
     }}
+    
+    @media (max-width: 480px) {{
+        .glass-card {{
+            padding: 0.75rem;
+            border-radius: 8px;
+        }}
+        
+        [data-testid="metric-container"] {{
+            padding: 0.75rem !important;
+            border-radius: 8px !important;
+        }}
+        
+        h1 {{
+            margin-bottom: 1rem;
+        }}
+        
+        h2 {{
+            margin-bottom: 0.75rem;
+        }}
+    }}
+    
+    /* Animations */
+    @keyframes fadeInUp {{
+        from {{
+            opacity: 0;
+            transform: translateY(30px);
+        }}
+        to {{
+            opacity: 1;
+            transform: translateY(0);
+        }}
+    }}
+    
+    .fade-in-up {{
+        animation: fadeInUp 0.6s ease-out;
+    }}
+    
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {{
+        width: 8px;
+    }}
+    
+    ::-webkit-scrollbar-track {{
+        background: {colors['surface_bg']};
+        border-radius: 4px;
+    }}
+    
+    ::-webkit-scrollbar-thumb {{
+        background: linear-gradient(45deg, {colors['accent_blue']}, {colors['accent_purple']});
+        border-radius: 4px;
+    }}
+    
+    ::-webkit-scrollbar-thumb:hover {{
+        background: linear-gradient(45deg, {colors['accent_purple']}, {colors['accent_blue']});
+    }}
     </style>
-    
-
     """, unsafe_allow_html=True)
-
-def get_card_style(accent_color=None):
-    """Get CSS style for custom cards with optional accent color"""
-    colors = get_theme_colors()
-    accent = accent_color or colors['accent_purple']
-    
-    return f"""
-    background: linear-gradient(135deg, {colors['card_bg']}, rgba(61, 47, 79, 0.6));
-    border: 1px solid {colors['border_color']};
-    border-radius: 12px;
-    padding: 1.5rem;
-    margin: 1rem 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    """
-
-def get_gradient_text_style(color1=None, color2=None):
-    """Get CSS style for gradient text"""
-    colors = get_theme_colors()
-    c1 = color1 or colors['accent_blue']
-    c2 = color2 or colors['accent_purple']
-    
-    return f"""
-    background: linear-gradient(45deg, {c1}, {c2});
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 600;
-    """

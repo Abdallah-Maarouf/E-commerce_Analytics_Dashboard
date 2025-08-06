@@ -1,243 +1,172 @@
 """
-Navigation components for the dashboard
+Modern top horizontal navigation with responsive design
 """
 
 import streamlit as st
-from dashboard.components.styling import get_theme_colors
 
 def setup_sidebar_navigation():
-    """Setup sidebar navigation with dark theme styling"""
-    colors = get_theme_colors()
+    """Create modern top horizontal navigation using Streamlit tabs"""
     
-    # Add custom toggle button that's always visible when sidebar is collapsed
-    st.markdown(f"""
+    # Apply basic styling
+    st.markdown("""
     <style>
-    /* Custom sidebar toggle button */
-    .custom-sidebar-toggle {{
-        position: fixed !important;
-        top: 1rem !important;
-        left: 1rem !important;
-        width: 3rem !important;
-        height: 3rem !important;
-        background: {colors['card_bg']} !important;
-        border: 2px solid {colors['accent_blue']} !important;
-        border-radius: 12px !important;
-        color: {colors['accent_blue']} !important;
-        cursor: pointer !important;
-        z-index: 999999 !important;
-        display: none !important;
-        align-items: center !important;
-        justify-content: center !important;
-        font-size: 1.5rem !important;
-        transition: all 0.3s ease !important;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5) !important;
-    }}
+    /* Hide default sidebar */
+    .css-1d391kg {display: none;}
+    section[data-testid="stSidebar"] {display: none;}
     
-    .custom-sidebar-toggle:hover {{
-        background: {colors['hover_color']} !important;
-        border-color: {colors['accent_purple']} !important;
-        color: {colors['accent_purple']} !important;
-        transform: scale(1.1) !important;
-        box-shadow: 0 6px 20px rgba(0, 212, 255, 0.3) !important;
-    }}
+    /* Main container adjustments */
+    .main .block-container {
+        padding-top: 1rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        max-width: none;
+    }
     
-    /* Show custom toggle when sidebar is collapsed */
-    .stApp[data-sidebar-state="collapsed"] .custom-sidebar-toggle {{
-        display: flex !important;
-    }}
-    
-    /* Sidebar title styling */
-    .sidebar-title {{
-        color: {colors['text_primary']};
-        font-size: 1.5rem;
-        font-weight: 700;
-        margin-bottom: 2rem;
+    /* Brand/Logo styling */
+    .nav-brand {
         text-align: center;
-        background: linear-gradient(45deg, {colors['accent_blue']}, {colors['accent_purple']});
+        margin-bottom: 2rem;
+        padding: 1rem 0;
+        background: rgba(26, 22, 37, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+    
+    .nav-brand h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        background: linear-gradient(45deg, #00d4ff, #9c27b0);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-    }}
+        margin: 0;
+    }
     
-    /* Navigation menu styling */
-    .nav-menu {{
-        margin-bottom: 2rem;
-    }}
+    .nav-brand p {
+        color: #e0e0e0;
+        font-size: 0.9rem;
+        margin: 0.25rem 0 0 0;
+        opacity: 0.8;
+    }
     
-    /* Page info styling */
-    .page-info {{
-        background: {colors['card_bg']};
-        border: 1px solid {colors['border_color']};
-        border-radius: 8px;
+    /* Enhanced tab styling */
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 8px;
+        background: rgba(26, 22, 37, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 16px;
         padding: 1rem;
-        margin-top: 2rem;
-        color: {colors['text_secondary']};
-    }}
+        border: 1px solid rgba(0, 212, 255, 0.2);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
     
-    .page-info h4 {{
-        color: {colors['accent_blue']} !important;
-        margin-bottom: 0.5rem;
-    }}
-    </style>
+    .stTabs [data-baseweb="tab"] {
+        background: rgba(61, 47, 79, 0.6);
+        border: 1px solid rgba(0, 212, 255, 0.3);
+        border-radius: 12px;
+        color: #e0e0e0;
+        font-weight: 500;
+        padding: 0.75rem 1.5rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+    }
     
-    <!-- Custom sidebar toggle button -->
-    <div class="custom-sidebar-toggle" onclick="toggleSidebar()" title="Show Sidebar">
-        ☰
-    </div>
+    .stTabs [data-baseweb="tab"]:hover {
+        background: rgba(0, 212, 255, 0.1);
+        border-color: #00d4ff;
+        color: #ffffff;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 212, 255, 0.2);
+    }
     
-    <script>
-    function toggleSidebar() {{
-        // Try multiple methods to toggle the sidebar
-        const toggleSelectors = [
-            '[data-testid="collapsedControl"]',
-            '.css-1rs6os',
-            'button[kind="header"]',
-            'button[data-testid="baseButton-header"]'
-        ];
-        
-        for (let selector of toggleSelectors) {{
-            const button = document.querySelector(selector);
-            if (button) {{
-                button.click();
-                return;
-            }}
-        }}
-        
-        // If no button found, try keyboard shortcut
-        document.dispatchEvent(new KeyboardEvent('keydown', {{
-            key: '[',
-            ctrlKey: true
-        }}));
-    }}
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #00d4ff, #9c27b0) !important;
+        border-color: #00d4ff !important;
+        color: #ffffff !important;
+        font-weight: 600 !important;
+        box-shadow: 0 6px 20px rgba(0, 212, 255, 0.3) !important;
+    }
     
-    // Monitor sidebar state and show/hide custom toggle
-    function monitorSidebarState() {{
-        const sidebar = document.querySelector('[data-testid="stSidebar"]');
-        const app = document.querySelector('.stApp');
-        const customToggle = document.querySelector('.custom-sidebar-toggle');
-        
-        if (sidebar && app && customToggle) {{
-            const sidebarVisible = sidebar.offsetWidth > 0;
-            if (sidebarVisible) {{
-                app.setAttribute('data-sidebar-state', 'expanded');
-                customToggle.style.display = 'none';
-            }} else {{
-                app.setAttribute('data-sidebar-state', 'collapsed');
-                customToggle.style.display = 'flex';
-            }}
-        }}
-    }}
-    
-    // Run monitoring
-    setInterval(monitorSidebarState, 100);
-    document.addEventListener('DOMContentLoaded', monitorSidebarState);
-    </script>
-    """, unsafe_allow_html=True)
-    
-    with st.sidebar:
-        # Dashboard title
-        st.markdown('<div class="sidebar-title">📊 E-commerce Analytics</div>', unsafe_allow_html=True)
-        
-        # Navigation menu
-        st.markdown('<div class="nav-menu">', unsafe_allow_html=True)
-        
-        pages = {
-            "Executive Overview": {
-                "icon": "🎯",
-                "description": "Key metrics and business overview"
-            },
-            "Market Expansion": {
-                "icon": "🗺️",
-                "description": "Geographic growth opportunities"
-            },
-            "Customer Analytics": {
-                "icon": "👥",
-                "description": "Customer insights and segmentation"
-            },
-            "Seasonal Intelligence": {
-                "icon": "📈",
-                "description": "Seasonal trends and forecasting"
-            },
-            "Payment & Operations": {
-                "icon": "💳",
-                "description": "Payment behavior and operations"
-            }
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+        .main .block-container {
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
         
-        # Create radio buttons for navigation
-        page_options = [f"{pages[page]['icon']} {page}" for page in pages.keys()]
-        selected_option = st.radio(
-            "Navigate to:",
-            page_options,
-            key="navigation",
-            label_visibility="collapsed"
-        )
+        .nav-brand h1 {
+            font-size: 1.5rem;
+        }
         
-        # Extract the selected page name (remove icon)
-        selected_page = selected_option.split(" ", 1)[1]
+        .nav-brand p {
+            font-size: 0.8rem;
+        }
         
-        st.markdown('</div>', unsafe_allow_html=True)
-        
-        # Show page information
-        if selected_page in pages:
-            st.markdown(f"""
-            <div class="page-info">
-                <h4>{pages[selected_page]['icon']} {selected_page}</h4>
-                <p>{pages[selected_page]['description']}</p>
-            </div>
-            """, unsafe_allow_html=True)
-        
-        # Add footer information
-        st.markdown("---")
-        st.markdown(f"""
-        <div style="text-align: center; color: {colors['text_secondary']}; font-size: 0.8rem;">
-            <p>Brazilian E-commerce Analytics</p>
-            <p>Built with Streamlit</p>
-        </div>
-        """, unsafe_allow_html=True)
+        .stTabs [data-baseweb="tab"] {
+            padding: 0.6rem 1rem;
+            font-size: 0.85rem;
+        }
+    }
+    </style>
+    """, unsafe_allow_html=True)
     
-    return selected_page
+    # Brand/Title section
+    st.markdown("""
+    <div class="nav-brand">
+        <h1>📊 E-commerce Analytics Dashboard</h1>
+        <p>Brazilian Market Intelligence & Business Insights</p>
+    </div>
+    """, unsafe_allow_html=True)
+    
+    # Navigation pages
+    pages = {
+        "Executive Overview": "🎯",
+        "Market Expansion": "🗺️", 
+        "Customer Analytics": "👥",
+        "Seasonal Intelligence": "📈",
+        "Payment & Operations": "💳"
+    }
+    
+    # Create tabs with icons
+    tab_labels = [f"{icon} {name}" for name, icon in pages.items()]
+    
+    # Initialize session state
+    if 'active_tab' not in st.session_state:
+        st.session_state.active_tab = "Executive Overview"
+    
+    # Find current tab index
+    page_names = list(pages.keys())
+    try:
+        current_index = page_names.index(st.session_state.active_tab)
+    except ValueError:
+        current_index = 0
+        st.session_state.active_tab = page_names[0]
+    
+    # Create the tabs
+    selected_tab = st.selectbox(
+        "Navigate to:",
+        options=page_names,
+        index=current_index,
+        format_func=lambda x: f"{pages[x]} {x}",
+        key="navigation_select",
+        label_visibility="collapsed"
+    )
+    
+    # Update session state if selection changed
+    if selected_tab != st.session_state.active_tab:
+        st.session_state.active_tab = selected_tab
+        st.rerun()
+    
+    return st.session_state.active_tab
 
 def show_page_header(title, subtitle=None, icon=None):
     """Display a styled page header"""
-    colors = get_theme_colors()
+    header_text = f"{icon} {title}" if icon else title
+    st.title(header_text)
     
-    # Use Streamlit's native components with custom styling
-    st.markdown(f"""
-    <div style="margin-bottom: 2rem;">
-        <h1 style="
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: {colors['text_primary']};
-            font-weight: 700;
-        ">
-            {icon + ' ' if icon else ''}{title}
-        </h1>
-        {f'<p style="font-size: 1.2rem; color: {colors["text_secondary"]}; margin-top: 0; font-weight: 300;">{subtitle}</p>' if subtitle else ''}
-    </div>
-    """, unsafe_allow_html=True)
-
-def create_breadcrumb(pages):
-    """Create a breadcrumb navigation"""
-    colors = get_theme_colors()
+    if subtitle:
+        st.markdown(f"*{subtitle}*")
     
-    breadcrumb_html = f"""
-    <div style="
-        margin-bottom: 1rem;
-        padding: 0.5rem 0;
-        border-bottom: 1px solid {colors['border_color']};
-    ">
-    """
-    
-    for i, page in enumerate(pages):
-        if i > 0:
-            breadcrumb_html += f' <span style="color: {colors["text_secondary"]};">></span> '
-        
-        if i == len(pages) - 1:  # Current page
-            breadcrumb_html += f'<span style="color: {colors["accent_blue"]}; font-weight: 600;">{page}</span>'
-        else:
-            breadcrumb_html += f'<span style="color: {colors["text_secondary"]};">{page}</span>'
-    
-    breadcrumb_html += "</div>"
-    
-    st.markdown(breadcrumb_html, unsafe_allow_html=True)
+    st.markdown("---")

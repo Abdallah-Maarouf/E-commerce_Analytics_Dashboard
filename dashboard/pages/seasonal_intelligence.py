@@ -530,54 +530,46 @@ def render():
     )
     
     # Key Insights and Recommendations
-    create_section_divider("Strategic Insights & Recommendations")
+    st.markdown("---")
+    st.header("Strategic Insights & Recommendations")
     
     col_insight1, col_insight2 = st.columns(2)
     
     with col_insight1:
-        create_info_card(
-            "Peak Season Strategy",
-            f"""
-            **High-Impact Months Identified:**
-            - **Mother's Day** (+31.5% revenue impact) - Highest performing event
-            - **Father's Day** (+26.6% revenue impact) - Strong commercial opportunity
-            - **Winter Vacation** (+24.5% revenue impact) - Seasonal demand peak
-            
-            **Preparation Timeline:**
-            - Begin inventory buildup 4-8 weeks before major events
-            - Focus on categories with high seasonality scores (CV > 0.8)
-            - Implement dynamic pricing strategies during peak periods
-            """,
-            icon="🎯"
-        )
+        st.subheader("🎯 Peak Season Strategy")
+        st.markdown(f"""
+        **High-Impact Months Identified:**
+        - **Mother's Day** (+31.5% revenue impact) - Highest performing event
+        - **Father's Day** (+26.6% revenue impact) - Strong commercial opportunity
+        - **Winter Vacation** (+24.5% revenue impact) - Seasonal demand peak
+        
+        **Preparation Timeline:**
+        - Begin inventory buildup 4-8 weeks before major events
+        - Focus on categories with high seasonality scores (CV > 0.8)
+        - Implement dynamic pricing strategies during peak periods
+        """)
     
     with col_insight2:
-        create_info_card(
-            "Inventory Risk Management",
-            f"""
-            **Risk Categories:**
-            - **High Risk**: {len(data['inventory_recommendations'][data['inventory_recommendations']['risk_level'] == 'High'])} categories requiring careful management
-            - **Medium Risk**: {len(data['inventory_recommendations'][data['inventory_recommendations']['risk_level'] == 'Medium'])} categories with moderate adjustments
-            - **Low Risk**: {len(data['inventory_recommendations'][data['inventory_recommendations']['risk_level'] == 'Low'])} stable categories
-            
-            **Buffer Stock Strategy:**
-            - High seasonality categories: 40-80% inventory adjustments
-            - Stable categories: 20-30% buffer stock recommended
-            - Balance portfolio with mix of seasonal and stable products
-            """,
-            icon="⚖️"
-        )
+        st.subheader("⚖️ Inventory Risk Management")
+        st.markdown(f"""
+        **Risk Categories:**
+        - **High Risk**: {len(data['inventory_recommendations'][data['inventory_recommendations']['risk_level'] == 'High'])} categories requiring careful management
+        - **Medium Risk**: {len(data['inventory_recommendations'][data['inventory_recommendations']['risk_level'] == 'Medium'])} categories with moderate adjustments
+        - **Low Risk**: {len(data['inventory_recommendations'][data['inventory_recommendations']['risk_level'] == 'Low'])} stable categories
+        
+        **Buffer Stock Strategy:**
+        - High seasonality categories: 40-80% inventory adjustments
+        - Stable categories: 20-30% buffer stock recommended
+        - Balance portfolio with mix of seasonal and stable products
+        """)
     
     # Forecasting Model Performance
-    create_info_card(
-        "Forecasting Model Performance",
-        f"""
-        **3-Month Predictions:**
-        - **November 2018 (Black Friday)**: Predicted R$ {data['forecasts'].iloc[0]['predicted_revenue']:,.0f} revenue with {data['forecasts'].iloc[0]['predicted_orders']:,} orders
-        - **December 2018 (Christmas)**: Predicted R$ {data['forecasts'].iloc[1]['predicted_revenue']:,.0f} revenue with {data['forecasts'].iloc[1]['predicted_orders']:,} orders
-        - **January 2019 (New Year)**: Predicted R$ {data['forecasts'].iloc[2]['predicted_revenue']:,.0f} revenue with {data['forecasts'].iloc[2]['predicted_orders']:,} orders
-        
-        **Note**: Confidence intervals are wide due to limited historical data. Model performance improves with more complete seasonal cycles.
-        """,
-        icon="🔮"
-    )
+    st.subheader("🔮 Forecasting Model Performance")
+    st.markdown(f"""
+    **3-Month Predictions:**
+    - **November 2018 (Black Friday)**: Predicted R$ {data['forecasts'].iloc[0]['predicted_revenue']:,.0f} revenue with {data['forecasts'].iloc[0]['predicted_orders']:,} orders
+    - **December 2018 (Christmas)**: Predicted R$ {data['forecasts'].iloc[1]['predicted_revenue']:,.0f} revenue with {data['forecasts'].iloc[1]['predicted_orders']:,} orders
+    - **January 2019 (New Year)**: Predicted R$ {data['forecasts'].iloc[2]['predicted_revenue']:,.0f} revenue with {data['forecasts'].iloc[2]['predicted_orders']:,} orders
+    
+    **Note**: Confidence intervals are wide due to limited historical data. Model performance improves with more complete seasonal cycles.
+    """)

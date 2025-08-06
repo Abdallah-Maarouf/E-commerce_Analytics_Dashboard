@@ -349,16 +349,14 @@ def render():
         )
     
     # Business Performance Summary
-    create_info_card(
-        "Executive Summary",
-        f"""
-        **Revenue Performance**: Total revenue of R$ {data['total_revenue']:,.2f} across {data['total_customers']:,} customers with an average order value of R$ {data['avg_order_value']:.2f}.
-        
-        **Market Position**: Strong presence across {data['total_states']} Brazilian states with {data['expansion_opportunities']} high-priority expansion opportunities identified.
-        
-        **Operational Excellence**: Maintaining {data['delivery_reliability']:.1f}% delivery reliability with average delivery time of {data['avg_delivery_days']:.1f} days.
-        
-        **Strategic Focus**: High customer value concentration ({data['high_value_rate']:.1f}% high-value customers) indicates effective customer acquisition and strong market positioning for continued growth.
-        """,
-        icon="📊"
-    )
+    st.subheader("📊 Executive Summary")
+    
+    st.markdown(f"""
+    **Revenue Performance**: Total revenue of R$ {data['total_revenue']:,.2f} across {data['total_customers']:,} customers with an average order value of R$ {data['avg_order_value']:.2f}.
+    
+    **Market Position**: Strong presence across {data['total_states']} Brazilian states with {data['expansion_opportunities']} high-priority expansion opportunities identified.
+    
+    **Operational Excellence**: Maintaining {data['delivery_reliability']:.1f}% delivery reliability with average delivery time of {data['avg_delivery_days']:.1f} days.
+    
+    **Strategic Focus**: High customer value concentration ({data['high_value_rate']:.1f}% high-value customers) indicates effective customer acquisition and strong market positioning for continued growth.
+    """)

@@ -616,34 +616,33 @@ def render():
     col_rec1, col_rec2 = st.columns(2)
     
     with col_rec1:
-        create_highlight_box(recommendations[0], type="info")
+        st.info(recommendations[0])
         if len(recommendations) > 2:
-            create_highlight_box(recommendations[2], type="success")
+            st.success(recommendations[2])
     
     with col_rec2:
         if len(recommendations) > 1:
-            create_highlight_box(recommendations[1], type="warning")
+            st.warning(recommendations[1])
     
     # Key Insights Summary
-    create_section_divider("Key Customer Analytics Insights")
+    st.markdown("---")
+    st.header("Key Customer Analytics Insights")
     
     # Calculate key insights
     high_value_percentage = (len(customer_data[customer_data['clv_category'].isin(['VIP', 'High Value'])]) / len(customer_data)) * 100
     avg_delivery_impact = customer_data.groupby('clv_category')['avg_delivery_experience'].mean()
     top_segment = segment_analysis.iloc[0]
     
-    create_info_card(
-        "Customer Analytics Summary",
-        f"""
-        **Customer Portfolio**: {data['total_customers']:,} total customers generating R$ {data['total_revenue']:,.2f} in revenue with an average customer value of R$ {data['avg_clv']:.2f}.
-        
-        **High-Value Concentration**: {high_value_percentage:.1f}% of customers are classified as High-Value or VIP, indicating strong customer acquisition quality and market positioning.
-        
-        **Segmentation Insights**: The largest segment is "{top_segment['customer_segment']}" with {top_segment['customer_count']:,} customers ({top_segment['percentage']:.1f}%) contributing R$ {top_segment['total_revenue']:,.2f} in total revenue.
-        
-        **Delivery Experience Impact**: Average delivery time of {data['avg_delivery_days']:.1f} days with {data['delivery_reliability_rate']:.1f}% reliability rate. VIP customers experience {avg_delivery_impact.get('VIP', 0):.1f} days average delivery time.
-        
-        **Strategic Focus**: Prioritize retention of high-value segments, optimize delivery experience for customer satisfaction, and implement targeted campaigns for each customer segment to maximize lifetime value.
-        """,
-        icon="📊"
-    )
+    st.subheader("📊 Customer Analytics Summary")
+    
+    st.markdown(f"""
+    **Customer Portfolio**: {data['total_customers']:,} total customers generating R$ {data['total_revenue']:,.2f} in revenue with an average customer value of R$ {data['avg_clv']:.2f}.
+    
+    **High-Value Concentration**: {high_value_percentage:.1f}% of customers are classified as High-Value or VIP, indicating strong customer acquisition quality and market positioning.
+    
+    **Segmentation Insights**: The largest segment is "{top_segment['customer_segment']}" with {top_segment['customer_count']:,} customers ({top_segment['percentage']:.1f}%) contributing R$ {top_segment['total_revenue']:,.2f} in total revenue.
+    
+    **Delivery Experience Impact**: Average delivery time of {data['avg_delivery_days']:.1f} days with {data['delivery_reliability_rate']:.1f}% reliability rate. VIP customers experience {avg_delivery_impact.get('VIP', 0):.1f} days average delivery time.
+    
+    **Strategic Focus**: Prioritize retention of high-value segments, optimize delivery experience for customer satisfaction, and implement targeted campaigns for each customer segment to maximize lifetime value.
+    """)
