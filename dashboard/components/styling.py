@@ -47,19 +47,19 @@ def apply_dark_theme():
     
     st.markdown(f"""
     <style>
-    /* Import modern fonts */
+    /* Import modern fonts with fallback */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
     
-    /* Global styles */
+    /* Global styles with better font fallbacks */
     * {{
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
     }}
     
     /* Main app container */
     .stApp {{
-        background: linear-gradient(135deg, {colors['primary_bg']} 0%, {colors['secondary_bg']} 100%);
-        color: {colors['text_primary']};
-        min-height: 100vh;
+        background: linear-gradient(135deg, {colors['primary_bg']} 0%, {colors['secondary_bg']} 100%) !important;
+        color: {colors['text_primary']} !important;
+        min-height: 100vh !important;
     }}
     
     /* Hide Streamlit elements */
